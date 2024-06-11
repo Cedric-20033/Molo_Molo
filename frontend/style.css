@@ -1,0 +1,58 @@
+body{
+    font-family: 'Open Sans', sans-serif;
+    background: #f8f9fa;
+}
+.bg-image{
+    background-image: url('../media/images/fauteuil.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.signin, .signup{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 15px;
+}
+.form-signin, .form-signup{
+    width: 100%;
+    max-width: 420px;
+    padding: 15px;
+    margin: auto;
+}
+.form-control{
+    border-radius: 30px;
+}
+a{
+    color: #007bff;
+    text-decoration: none;
+}
+a:hover{
+    color: #0056b3;
+    text-decoration: underline;
+}
+.container-fluid{
+    padding: 0;
+}
+.form-control::placeholder{
+    color: #6c757d;
+}
+.row.no.gutter{
+    margin-left: 0;
+    margin-right: 0;
+}
+.display-4{
+    font-weight: 300;
+    line-height: 1.2;
+}
+.text-primary{
+    color: #007bff; 
+}
+.rounded-pill{
+    border-radius: 50rem; 
+}
+
+.navbar{
+    background-color: red;
+    color: white;
+}

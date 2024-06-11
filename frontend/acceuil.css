@@ -1,0 +1,117 @@
+body{
+    font-family: Arial, sans-serif;
+}
+header{
+    background-color: #ffcc00;
+    color: #333;
+    padding: 50px 0;
+}
+header h1{
+    font-size: 3em;
+    margin-bottom: 0;
+}
+header p{
+    font-size: 1.5em;
+    margin-top: 0;
+}
+header a{
+    margin-top: 20px;
+}
+
+.nouveautes, .collection-boutique {
+    padding: 50px 0;
+}
+.nouveautes h2, .collection-boutique h2{
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+.card {
+    margin-bottom: 30px;
+    border: none;
+}
+.card-body{
+    text-align: center;
+}
+.collection-item{
+    margin-bottom: 30px;
+}
+.collection-item img{
+    max-width: 100%;
+    height: auto;
+}
+.collection-item h5{
+    margin-top: 15px;
+}
+
+/*element horizontal*/
+
+.no{
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto; /*ajout d'un defilement horizontal si necessaire*/
+    -webkit-overflow-scrolling: touch;
+}
+.no > .col-lg-4, .no > .col-md-6{
+    flex: 0 0 auto; /*empecher les colonnes de s'etirer*/
+}
+
+
+.best-seller .card{
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: transform 0.2s ease;
+}
+.best-seller .card:hover{
+    transform: translateY(-10px);
+    cursor: pointer;
+}
+.promotion{
+    background-color: #dc3545;
+    color: #fff;
+    padding: 50px 0;
+}
+.promotion .countdown{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.promotion .countdown div{
+    margin: 0px 10px;
+    text-align: center;
+}
+.promotion .countdown h3{
+    margin: 0;
+    font-size: 2.5em;
+}
+.promotion .countdown p{
+    margin: 0;
+}
+.advantages{
+    background-color: #f8f9fa;
+    padding: 50px 0;
+}
+.advantages h5{
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+.advantages p{
+    font-size: 1em;
+    margin: 0px;
+}
+.instagram{
+    background-color: #f8f9fa;
+    padding: 50px 0;
+}
+.instagram img{
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+.instagram h2{
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+.instagram p{
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}

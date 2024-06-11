@@ -1,0 +1,71 @@
+body{
+    font-family: Arial, sans-serif;
+}
+
+header{
+    background-color: #ffcc00;
+    color: #333;
+    padding: 50px 0;
+}
+header h1{
+    font-size: 3em;
+    margin-bottom: 0;
+}
+header p{
+    font-size: 1.5em;
+    margin-top: 0;
+}
+header a{
+    margin-top: 20px;
+}
+
+.nouveautes, .collection-boutique {
+    padding: 50px 0;
+}
+.nouveautes h2, .collection-boutique h2{
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+.card {
+    margin-bottom: 30px;
+}
+.card-body{
+    text-align: center;
+}
+.collection-item{
+    margin-bottom: 30px;
+}
+.collection-item img{
+    max-width: 100%;
+    height: auto;
+}
+.collection-item h5{
+    margin-top: 15px;
+}
+
+/*animation*/
+
+.animate__fadeIn{
+    visibility: hidden;
+}
+.animate__bounceIn{
+    visibility: hidden;
+}
+.animate__fadeInUp{
+    visibility: hidden;
+}
+.animate__zoomIn{
+    visibility: hidden;
+}
+
+/*element horizontal*/
+
+.row{
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto; /*ajout d'un defilement horizontal si necessaire*/
+    -webkit-overflow-scrolling: touch;
+}
+.row > .col-lg-4, .row > .col-md-6{
+    flex: 0 0 auto; /*empecher les colonnes de s'etirer*/
+}
