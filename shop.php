@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./frontend/shop.css">
     <title>Molo Molo</title>
 </head>
 <body>
@@ -115,7 +116,7 @@
                     <!-- les produits seront inséré ici via js -->
 
                 </div>
-                <div class="text-center mt-4">
+                <div class="text-center mt-4 mb-4">
                     <button id="show-more" class="btn btn-dark">voir plus</button>
                 </div>
             </main>
@@ -131,7 +132,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script>
-    alert('ok');
 $(document).ready(function() {
     var products = <?php echo json_encode($product); ?>;
     var currentPage = 1;
@@ -142,17 +142,15 @@ $(document).ready(function() {
         products.forEach(product => {
             var productHTML = `
                 <div class="col-md-4 mb-4">
-                    <div class="card h-100">
+                    <div class="card h-100 animate__animated animate__zoomIn">
                         <img src="./media/images/${product.image}" class="card-img-top" alt="${product.nom}">
+                        <button class="btn btn-dark add-to-cart" data-id="${product.id} ">ajouter au panier</button>
                         <div class="card-body">
-                            <h5 class="card-title">${product.nom}</h5>
-                            <p class="card-text">${product.prix} xaf</p>
                             <div class="ratings">
                                 ${renderStars(product.note)}
                             </div>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-dark add-to-cart" data-id=" ${product.id} ">ajouter au panier</button>
+                            <h5 class="card-title">${product.nom}</h5>
+                            <p class="card-text">${product.prix} xaf</p>
                         </div>
                     </div>
                 </div>
