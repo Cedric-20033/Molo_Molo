@@ -34,6 +34,3 @@ body{
 .card-img-top:hover{
     transform: scale(1.05);
 }
-.fa-star{
-    color: #ffcc00;
-}
