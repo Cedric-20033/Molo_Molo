@@ -1,3 +1,8 @@
+<?php 
+    include("./backend/fonction.php");
+    include("./backend/class.php");
+    $new_product = produit_poo();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -65,214 +70,122 @@
             </ul>
         </div>
     </nav>
+    <div class="container-fluid">
     <header class="bg-warning text-dark text-center p-5 animate__fadeIn">
         <div class="container-fluid d-flex">
             <div class="col-md-5 ml-4">
-                <img src="./media/images/homme.png" alt="" style="max-width: 50%" class="img-fluid animate__animated animate__bounceIn">
+                <img src="./media/images/voiture2.png" alt="" style="max-width: 100%" class="img-fluid animate__animated animate__bounceIn">
             </div>
             <div class="col-md-7 mr-4">
-                <h1 class="font-weight-bold">votre shopping, votre <strong style="color: red;">EPARGNE</strong></h1>
+                <h1 class="font-weight-bold">votre Achat, votre <strong style="color: red;">EPARGNE</strong></h1>
                 <p class="animate__animated lead">simplifiez vous la vie.</p>
-                <p>transformez vos dépenses en épargne sans effort.</p>
+                <p>transformez vos Achats en épargne sans effort.</p>
                 <a href="#" style="background-color: red; border: none" class="btn btn-primary mt-3 animate__animated animate__bounceIn">Econnomisez maintenant</a>
             </div>
         </div>
     </header>
+    </div>
 
     <section class="nouvautes py-5">
-        <div class="container">
-            <h2 class="text-center mb-4 animate__animated animate__fadeInUp">nouvautés</h2>
+        <div class="container ">
+            <h2 class="text-center mb-4 animate__animated animate__fadeInUp">nouveautés</h2>
             <div class="row no">
-                <div class="col-lg-3 col-md-4 mb-4 animate__animated animate__zoomIn">
-                    <div class="card h-100">
-                        <img src="./media/images/fauteuil.jpg" alt="casque sans fil" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">casque sans fil model UF-285GG</h5>
-                            <p class="card-text">12.000 xaf <del>18.000 xaf</del></p>
+                <?php 
+                    foreach ($new_product as $row) {
+                        ?>
+                        <div class="col-12 col-sm-6 col-lg-4 mb-4 animate__animated animate__zoomIn">
+                            <div class="card">
+                                <span class="badge badge-blanc text-dark col-2 mt-2 offset-1">NEW</span>
+                                <img src="./media/images/<?=$row['image']; ?>" alt="<?=$row['nom']; ?>" class="card-img-top img-fluid mb-3">
+                                <div class="card-body mt-0">
+                                    <h5 class="card-title mt-0"><?=$row['nom']; ?> </h5>
+                                    <p class="card-text mt-0"><?=$row['prix']; ?> <del><?=$row['prix']*100/4; ?></del></p>
+                                    <a href="#" class="btn btn-dark mt-3" id="<?=$row['id']; ?>">ajouter au panier</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-footer">
-                            <a href="#" class="btn btn-dark">ajouter au panier</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 mb-4 animate__animated animate__zoomIn">
-                    <div class="card h-100">
-                        <img src="./media/images/fauteuil.jpg" alt="casque sans fil" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">casque sans fil model UF-285GG</h5>
-                            <p class="card-text">12.000 xaf <del>18.000 xaf</del></p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="btn btn-dark">ajouter au panier</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 mb-4 animate__animated animate__zoomIn">
-                    <div class="card h-100">
-                        <img src="./media/images/fauteuil.jpg" alt="casque sans fil" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">casque sans fil model UF-285GG</h5>
-                            <p class="card-text">12.000 xaf <del>18.000 xaf</del></p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="btn btn-dark">ajouter au panier</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 mb-4 animate__animated animate__zoomIn">
-                    <div class="card h-100">
-                        <img src="./media/images/fauteuil.jpg" alt="casque sans fil" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">casque sans fil model UF-285GG</h5>
-                            <p class="card-text">12.000 xaf <del>18.000 xaf</del></p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="btn btn-dark">ajouter au panier</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 mb-4 animate__animated animate__zoomIn">
-                    <div class="card h-100">
-                        <img src="./media/images/fauteuil.jpg" alt="casque sans fil" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">casque sans fil model UF-285GG</h5>
-                            <p class="card-text">12.000 xaf <del>18.000 xaf</del></p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="btn btn-dark">ajouter au panier</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 mb-4 animate__animated animate__zoomIn">
-                    <div class="card h-100">
-                        <img src="./media/images/fauteuil.jpg" alt="casque sans fil" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">casque sans fil model UF-285GG</h5>
-                            <p class="card-text">12.000 xaf <del>18.000 xaf</del></p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="btn btn-dark">ajouter au panier</a>
-                        </div>
-                    </div>
-                </div>
+                        <?php
+                    }
+                ?>
 
             </div>
         </div>
     </section>
 
     <section class="collection-boutique py-5 bg-light">
+        <?php 
+            //créer une instance de la connexion a la bd
+            $db = new Database();
+            $pdo = $db->pdo;
+
+            //créer ue instance du gestionnaire de produit
+            $productManager = new ProductManager($pdo);
+
+            //sélectionner 3 categorie au hasard
+            $randomCategorie = $productManager->getRandomCategories();
+
+            //selectionner un produit au hasard pour chaque categorie
+            $randomproducts = [];
+            foreach ($randomCategorie as $categorie) {
+                $product = $productManager->getRandomProductByCategorie($categorie['nom']);
+                if($product){
+                    $randomproducts[] = $product;
+                }
+            }
+        ?>
         <div class="container">
             <h2 class="text-center mb-4 animate__animated animate__fadeInUp">collection de la boutique</h2>
             <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4 animate__animated animate__zoomIn">
-                    <div class="collection-item text-center">
-                        <img src="./media/images/fauteuil.jpg" alt="" class="img-fluid">
-                        <h5 class="mt-3">headband</h5>
-                        <a href="#" class="btn btn-dark mt-2">Collection</a>
+                <?php 
+                foreach ($randomproducts as $produit) {
+                    ?>
+                    <div class="col-12 col-lg-4 mb-4 animate__animated animate__zoomIn">
+                        <div class="collection-item text-center">
+                            <img src="./media/images/<?=$produit['image'];?>" alt="" class="img-collection img-fluid mb-3">
+                            <h4 class="mt-3">collection: <?=$produit['categorie'];?></h4>
+                            <h5 class="mt-3"><?=$produit['nom'];?></h5>
+                            <a href="#" class="btn btn-dark mt-2">Collection</a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4 animate__animated animate__zoomIn">
-                    <div class="collection-item text-center">
-                        <img src="./media/images/fauteuil.jpg" alt="" class="img-fluid">
-                        <h5 class="mt-3">headband</h5>
-                        <a href="#" class="btn btn-dark mt-2">Collection</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4 animate__animated animate__zoomIn">
-                    <div class="collection-item text-center">
-                        <img src="./media/images/fauteuil.jpg" alt="" class="img-fluid">
-                        <h5 class="mt-3">headband</h5>
-                        <a href="#" class="btn btn-dark mt-2">Collection</a>
-                    </div>
-                </div>
+                    <?php
+                }
+                ?>
 
             </div>
         </div>
     </section>
 
     <section class="best-seller py-5">
+        <?php 
+        $bestSeller = $productManager->getTopRateProducts();
+        ?>
         <div class="container">
             <h2 class="text-center mb-4">meilleures ventes</h2>
             <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                    <div class="card animate__animated animate__fadeInUp">
-                        <span class="badge badge-danger col-2 offset-5">HOT</span>
-                        <img src="./media/images/fauteuil.jpg" alt="produit 1" class="card-img-top">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">sony - wh-1000xm5 wireless</h5>
-                            <p class="card-text">5.000 xaf</p>
+                <?php 
+                if(is_array($bestSeller) && count($bestSeller) > 0){
+                    foreach ($bestSeller as $product) {
+                        ?>
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                            <div class="card animate__animated animate__fadeInUp">
+                                <span class="badge badge-danger col-2 offset-5">HOT</span>
+                                <img src="./media/images/<?=$product['image'];?>" alt="produit 1" class="card-img-top img-luid mt-3">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title"><?=$product['nom']; ?></h5>
+                                    <p class="card-text"><?=$product['prix']; ?> xaf</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                    <div class="card animate__animated animate__fadeInUp">
-                        <span class="badge badge-danger col-2 offset-5">HOT</span>
-                        <img src="./media/images/fauteuil.jpg" alt="produit 1" class="card-img-top">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">sony - wh-1000xm5 wireless</h5>
-                            <p class="card-text">5.000 xaf</p>
-                        </div>
-                    </div>
-                </div><div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                    <div class="card animate__animated animate__fadeInUp">
-                        <span class="badge badge-danger col-2 offset-5">HOT</span>
-                        <img src="./media/images/fauteuil.jpg" alt="produit 1" class="card-img-top">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">sony - wh-1000xm5 wireless</h5>
-                            <p class="card-text">5.000 xaf</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                    <div class="card animate__animated animate__fadeInUp">
-                        <span class="badge badge-danger col-2 offset-5">HOT</span>
-                        <img src="./media/images/fauteuil.jpg" alt="produit 1" class="card-img-top">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">sony - wh-1000xm5 wireless</h5>
-                            <p class="card-text">5.000 xaf</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                    <div class="card animate__animated animate__fadeInUp">
-                        <span class="badge badge-danger col-2 offset-5">HOT</span>
-                        <img src="./media/images/fauteuil.jpg" alt="produit 1" class="card-img-top">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">sony - wh-1000xm5 wireless</h5>
-                            <p class="card-text">5.000 xaf</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                    <div class="card animate__animated animate__fadeInUp">
-                        <span class="badge badge-danger col-2 offset-5">HOT</span>
-                        <img src="./media/images/fauteuil.jpg" alt="produit 1" class="card-img-top">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">sony - wh-1000xm5 wireless</h5>
-                            <p class="card-text">5.000 xaf</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                    <div class="card animate__animated animate__fadeInUp">
-                        <span class="badge badge-danger col-2 offset-5">HOT</span>
-                        <img src="./media/images/fauteuil.jpg" alt="produit 1" class="card-img-top">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">sony - wh-1000xm5 wireless</h5>
-                            <p class="card-text">5.000 xaf</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                    <div class="card animate__animated animate__fadeInUp">
-                        <span class="badge badge-danger col-2 offset-5">HOT</span>
-                        <img src="./media/images/fauteuil.jpg" alt="produit 1" class="card-img-top">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">sony - wh-1000xm5 wireless</h5>
-                            <p class="card-text">5.000 xaf</p>
-                        </div>
-                    </div>
-                </div>
+                        <?php
+                    }
+                }else{
+                    ?>
+                        <div class="alert alert-warning">aucun article trouvé</div>
+                    <?php
+                }
+                //$db->closeConnexion();
+                
+                ?>
 
             </div>
         </div>
@@ -282,7 +195,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <img src="./media/images/homme.png" alt="" class="img-fluid">
+                    <img src="./media/images/grand_format.png" alt="" class="img-fluid">
                 </div>
                 <div class="col-md-6">
                     <h2 class="mb-3">PROMOTION</h2>

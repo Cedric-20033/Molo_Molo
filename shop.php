@@ -3,7 +3,7 @@
     $product = produit();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,23 +38,23 @@
                 </li>
             </ul>
         </div>
-
+    
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link"><li class="fas fa-search" style="cursor: pointer"></li></a>
+                    <a href="#" class="nav-link"><li class="fas fa-search" style="cursor: pointer; color: white;"></li></a>
                 </li>
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link"><li class="fas fa-shopping-cart" style="cursor: pointer"></a>
+                    <a href="#" class="nav-link"><li class="fas fa-shopping-cart" style="cursor: pointer; color: white;"></a>
                 </li>
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link"><li class="fas fa-user" style="cursor: pointer"></a>
+                    <a href="#" class="nav-link"><li class="fas fa-user" style="cursor: pointer; color: white;"></a>
                 </li>
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link"><li class="fas fa-sign-in-alt" style="cursor: pointer"></a>
+                    <a href="#" class="nav-link"><li class="fas fa-sign-in-alt" style="cursor: pointer; color: white;"></a>
                 </li>
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link"><li class="fas fa-sign-out-alt" style="cursor: pointer"></a>
+                    <a href="#" class="nav-link"><li class="fas fa-sign-out-alt" style="cursor: pointer; color: white;"></a>
                 </li>
             </ul>
         </div>
@@ -72,38 +72,44 @@
     <div class="container-fluid">
         <div class="row">
             <!-- filtre -->
-            <aside class="col-md-3">
-                <h5 class="mt-4">Filtre</h5>
-                <div class="filter-category">
-                    <h6>CATEGORIES</h6>
-                    <ul class="list-unstyled">
-                        <li><input type="checkbox" name="category" value="all" checked>tous</li>
-                        <li><input type="checkbox" name="category" value="ordinateur" >ordinateur</li>
-                        <li><input type="checkbox" name="category" value="automobile" >automobile</li>
-                        <li><input type="checkbox" name="category" value="cuisine" >cuisine</li>
-                        <li><input type="checkbox" name="category" value="electromenager" >électro-ménager</li>
-                        <li><input type="checkbox" name="category" value="meuble" >meuble</li>
-                        <li><input type="checkbox" name="category" value="montre" >montre</li>
-                    </ul>
-                </div>
-                <div class="filter-price">
-                    <h6>PRIX</h6>
-                    <ul class="list-unstyled">
-                        <li><input type="checkbox" name="price" value="0-10000">0-10000</li>
-                        <li><input type="checkbox" name="price" value="10000-100000">10.000xaf - 100.000xaf</li>
-                        <li><input type="checkbox" name="price" value="100000-200000">100.000xaf - 200.000xaf</li>
-                        <li><input type="checkbox" name="price" value="200000-300000">200.000xaf - 300.000xaf</li>
-                        <li><input type="checkbox" name="price" value="400000">400.000xaf +</li>
-                    </ul>
+            <aside class="col-lg-3 overlay d-none d-lg-block" id="overlay">
+                <div class="overlay-content" id="overlay-content">
+                    <div class="d-flex"><h5 class="mt-4">Filtres</h5></div>
+                    <div class="filter-category">
+                        <h6>CATEGORIES</h6>
+                        <ul class="list-unstyled">
+                            <li><input type="checkbox" name="category" value="all" checked>tous</li>
+                            <li><input type="checkbox" name="category" value="ordinateur" >ordinateur</li>
+                            <li><input type="checkbox" name="category" value="automobile" >automobile</li>
+                            <li><input type="checkbox" name="category" value="cuisine" >cuisine</li>
+                            <li><input type="checkbox" name="category" value="electromenager" >électro-ménager</li>
+                            <li><input type="checkbox" name="category" value="meuble" >meuble</li>
+                            <li><input type="checkbox" name="category" value="montre" >montre</li>
+                        </ul>
+                    </div>
+                    <div class="filter-price">
+                        <h6>PRIX</h6>
+                        <ul class="list-unstyled">
+                            <li><input type="checkbox" name="price" value="0-10000">0-10000</li>
+                            <li><input type="checkbox" name="price" value="10000-100000">10.000xaf - 100.000xaf</li>
+                            <li><input type="checkbox" name="price" value="100000-200000">100.000xaf - 200.000xaf</li>
+                            <li><input type="checkbox" name="price" value="200000-300000">200.000xaf - 300.000xaf</li>
+                            <li><input type="checkbox" name="price" value="400000">400.000xaf +</li>
+                        </ul>
+                    </div>
+
+                    <button type="button" class="btn btn-danger d-none" id="close-overlay">Fermer</button>
                 </div>
             </aside>
 
+            <button class="arrow-button d-block d-lg-none" id="arrow-button" style="border: none">Filtres &#x25B2;</button>
+
             <!-- produits-->
-            <main class="col-md-9">
+            <main class="col-12 col-lg-9">
                 <div class="d-flex justify-content-between align-items-center mt-4 mb-2">
                     <h5>séjour</h5>
                     <div>
-                        <span>trier par</span>
+                        <span>Article</span>
                         <select id="sort" class="form-control d-inline-block w-auto">
                             <option value="default">par défaut</option>
                             <option value="price_asc">prix croissant</option>
@@ -117,7 +123,7 @@
 
                 </div>
                 <div class="text-center mt-4 mb-4">
-                    <button id="show-more" class="btn btn-dark">voir plus</button>
+                    <button id="show-more" class="btn btn-dark">suivant</button>
                 </div>
             </main>
         </div>
@@ -135,16 +141,18 @@
 $(document).ready(function() {
     var products = <?php echo json_encode($product); ?>;
     var currentPage = 1;
-    var productsPerPage = 6;
+    var productsPerPage = 9;
 
     function renderProducts(products) {
         $('#product-grid').empty();
         products.forEach(product => {
             var productHTML = `
-                <div class="col-md-4 mb-4">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                     <div class="card h-100 animate__animated animate__zoomIn">
-                        <img src="./media/images/${product.image}" class="card-img-top" alt="${product.nom}">
-                        <button class="btn btn-dark add-to-cart" data-id="${product.id} ">ajouter au panier</button>
+                        <img src="./media/images/${product.image}" class="card-img-top img-fluid mb-3" alt="${product.nom}">
+                        <div class="container">
+                            <button class="btn btn-dark add-to-cart" data-id="${product.id} " style="width: 100%">ajouter au panier</button>
+                        </div>
                         <div class="card-body">
                             <div class="ratings">
                                 ${renderStars(product.note)}
@@ -237,6 +245,7 @@ $(document).ready(function() {
     updateProducts();
 })
 </script>
+<script src="./frontend/shop.js"></script>
     
 </body>
 </html>

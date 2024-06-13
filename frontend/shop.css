@@ -3,7 +3,7 @@ body{
 }
 
 .shop-header{
-    background-image: url('../media/images/fauteuil.jpg');
+    background-image: url('../media/images/galaxe5.png');
     background-size: cover;
     color: white;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
@@ -22,15 +22,58 @@ body{
 .card{
     border: none;
     border-radius: 5px;
-    background-color: #d1d0d0;
+    background-color: #f5f4f4;
 }
-.card-img-top:hover{
+.card-img-top{
     transform: 0.2s;
-    background-color: green;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
 }
 .card:hover{
     cursor: pointer;
 }
 .card-img-top:hover{
     transform: scale(1.05);
+}
+.fa-star{
+    width: 10px;
+    margin: 5px;
+}
+
+/* filtre rsponsive */
+
+.c-overlay{
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.c-overlay-content{
+    /*position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);*/
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    /*width: auto;*/
+    max-height: 80%;
+    overflow: auto;
+}
+.arrow-button{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1060;
+    background-color: red;
+    color: white;
 }
