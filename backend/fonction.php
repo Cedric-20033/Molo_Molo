@@ -29,6 +29,23 @@ function produit(){
     return $products;
 }
 
+//meilleurs produits
+
+function produit_best(){
+    $con = connexion();
+    $req="SELECT * FROM produits ORDER BY note DESC LIMIT 8";
+    $res=mysqli_query($con, $req);
+    $products = array();
+    if($res == true){
+        while($row = mysqli_fetch_assoc($res)){
+            $products[] = $row;
+        }
+    }
+
+    mysqli_close($con);
+    return $products;
+}
+
 //poo
 
 function connexion_poo(){
@@ -59,5 +76,15 @@ function produit_poo(){
     return $results;
 }
 
+//fonction pour selectionner un seul produit
 
+function select_product($id){
+    $produits = [
+        1=>["id" => 1, "nom" => "moto1", "image" => "moto.png", "categorie" => "automobile", "prix" => 1000000],
+        2=>["id" => 2, "nom" => "moto2", "image" => "moto.png", "categorie" => "automobile", "prix" => 1000000],
+        3=>["id" => 1, "nom" => "moto3", "image" => "moto.png", "categorie" => "automobile", "prix" => 1000000]
+    ];
+
+    return isset($produits[$id]) ? $produits[$id] : null;
+}
 ?>

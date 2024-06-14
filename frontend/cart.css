@@ -1,0 +1,20 @@
+.cart-summary{
+    position: sticky;
+    top: 70px;
+}
+.icon-button{
+    background: none;
+    border: none;
+    color: #007bff;
+}
+.icon-button:hover{
+    color: #0056b3;
+    text-decoration: underline;
+}
+.product-image{
+    width: 100px;
+    height: auto;
+}
+.fixed-top{
+    z-index: 1030;
+}

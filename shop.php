@@ -45,7 +45,7 @@
                     <a href="#" class="nav-link"><li class="fas fa-search" style="cursor: pointer; color: white;"></li></a>
                 </li>
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link"><li class="fas fa-shopping-cart" style="cursor: pointer; color: white;"></a>
+                    <a href="cart.php" class="nav-link"><li class="fas fa-shopping-cart" style="cursor: pointer; color: white;"></a>
                 </li>
                 <li class="navbar-item ml-3">
                     <a href="#" class="nav-link"><li class="fas fa-user" style="cursor: pointer; color: white;"></a>

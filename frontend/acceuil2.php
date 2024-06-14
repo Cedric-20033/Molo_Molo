@@ -56,7 +56,7 @@
                     <a href="#" class="nav-link"><li class="fas fa-search" style="cursor: pointer"></li></a>
                 </li>
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link"><li class="fas fa-shopping-cart" style="cursor: pointer"></a>
+                    <a href="cart.php" class="nav-link"><li class="fas fa-shopping-cart" style="cursor: pointer"></a>
                 </li>
                 <li class="navbar-item ml-3">
                     <a href="#" class="nav-link"><li class="fas fa-user" style="cursor: pointer"></a>
@@ -157,7 +157,8 @@
 
     <section class="best-seller py-5">
         <?php 
-        $bestSeller = $productManager->getTopRateProducts();
+        //$bestSeller = $productManager->getTopRateProducts();
+        $bestSeller = produit_best();
         ?>
         <div class="container">
             <h2 class="text-center mb-4">meilleures ventes</h2>
@@ -170,7 +171,7 @@
                             <div class="card animate__animated animate__fadeInUp">
                                 <span class="badge badge-danger col-2 offset-5">HOT</span>
                                 <img src="./media/images/<?=$product['image'];?>" alt="produit 1" class="card-img-top img-luid mt-3">
-                                <div class="card-body text-center">
+                                <div class="card-body text-center" style="max-width: 90%; min-width: 90%;">
                                     <h5 class="card-title"><?=$product['nom']; ?></h5>
                                     <p class="card-text"><?=$product['prix']; ?> xaf</p>
                                 </div>
@@ -229,18 +230,22 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-3">
+                    <i class="fas fa-shipping-fast icon"></i>
                     <h5>livraison gratuite</h5>
                     <p>pour les achats de plus de 30.000 xaf</p>
                 </div>
                 <div class="col-md-3">
+                    <i class="fas fa-undo icon"></i>
                     <h5>satisfait / remboursé</h5>
                     <p>30 jours de garantie</p>
                 </div>
                 <div class="col-md-3">
+                    <i class="fas fa-lock icon"></i>
                     <h5>paiements sécurisés</h5>
                     <p>sécurisé par OM et MoMo</p>
                 </div>
                 <div class="col-md-3">
+                    <i class="fas fa-headset icon"></i>
                     <h5>support client</h5>
                     <p>téléphone ou email</p>
                 </div>
@@ -251,6 +256,7 @@
 
     <section class="instagram py-5 bg-light text-center">
         <div class="container">
+            <i class="fas fa-instagram icon icon-instagram" title="instagram"></i>
             <h2 class="mb-4">instagram</h2>
             <p>suivez-nous sur les reseaux sociaux pour plus de promotion</p>
             <p>molo_molo_officiel</p>
