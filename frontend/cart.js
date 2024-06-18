@@ -86,15 +86,16 @@ function retirerArticle(id){
 }
 
 function mettreAjourQuantite(id, quantite){
-    alert("ok")
-    let item = panier.find(item => item.id === id);
-    if(item !== 0){
+
+    /*let item = panier.find(item => item.id === id);
+    if(item){
         item.nombre = parseInt(quantite);
-    }
+    }*/
+    console.log(quantite)
 
    for(let i=0; i < panier.length; i++){
-        if(panier[i].id === item.id){
-            panier[i].nombre = item.nombre;
+        if(parseInt(panier[i].id) === parseInt(id)){
+            panier[i].nombre = parseInt(quantite);
             break;
         }
    }

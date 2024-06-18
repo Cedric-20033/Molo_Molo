@@ -7,7 +7,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             echo json_encode($product);
             exit;
         }elseif($_POST['action'] === 'addToCart' && isset($_POST['id']) && isset($_POST['nombre'])){
-            $id =$_POST['id'];
+            $id = $_POST['id'];
             $nombre = $_POST['nombre'];
             if(!isset($_SESSION['panier'])){
                 $_SESSION['panier'] = [];
@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $found = false;
             foreach($_SESSION['panier'] as $item){
                 if($item['id'] == $id){
-                    $item['nombre'] += $nombre;
+                    $item['nombre'] = $nombre + 1;
                     $found = true;
                     break;
                 }
