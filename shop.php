@@ -151,7 +151,7 @@ $(document).ready(function() {
                     <div class="card h-100 animate__animated animate__zoomIn">
                         <img src="./media/images/${product.image}" class="card-img-top img-fluid mb-3" alt="${product.nom}">
                         <div class="container">
-                            <button class="btn btn-dark add-to-cart" data-id="${product.id} " style="width: 100%">ajouter au panier</button>
+                            <button class="btn btn-dark add-to-cart" onclick="ajouterAuPanier(${product.id}, 1)" data-id="${product.id} " style="width: 100%">ajouter au panier</button>
                         </div>
                         <div class="card-body">
                             <div class="ratings">

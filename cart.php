@@ -1,9 +1,47 @@
 <?php  
 include("./backend/fonction.php");
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'getProduct' && isset($_POST['id'])){
-    $product = select_product($_POST['id']);
-    echo json_encode($product);
-    exit;
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    if(isset($_POST['action'])){
+        if($_POST['action'] === 'getProduct' && isset($_POST['id'])){
+            $product = select_product($_POST['id']);
+            echo json_encode($product);
+            exit;
+        }elseif($_POST['action'] === 'addToCart' && isset($_POST['id']) && isset($_POST['nombre'])){
+            $id =$_POST['id'];
+            $nombre = $_POST['nombre'];
+            if(!isset($_SESSION['panier'])){
+                $_SESSION['panier'] = [];
+            }
+
+            $found = false;
+            foreach($_SESSION['panier'] as $item){
+                if($item['id'] == $id){
+                    $item['nombre'] += $nombre;
+                    $found = true;
+                    break;
+                }
+            }
+
+            if(!$found){
+                $_SESSION['panier'] [] = ['id' => $id, 'nombre' => $nombre];
+            }
+
+            echo json_encode($_SESSION['panier']);
+            exit;
+        }elseif($_POST['action'] === 'getCart'){
+            if(!isset($_SESSION['panier'])){
+                $_SESSION['panier'] = [];
+            }
+
+            echo json_encode($_SESSION['panier']);
+            exit;
+        }elseif($_POST['action'] === 'updateCart' && isset($_POST['panier'])){
+            $_SESSION['panier'] = json_decode($_POST['panier'], true);
+
+            echo json_encode($_SESSION['panier']);
+            exit;
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -66,10 +104,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['a
 
     <div class="container mt-5 pt-5">
         <h1>panier</h1>
+
         <div class="row">
             <div class="col-md-8">
                 <div id="cart-items">
                     <!-- ici les elements affichés par js -->
+                </div>
+                <div class="spinner-border" id="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="sr-only">Loading...</span>
                 </div>
             </div>
             <div class="col-md-4">
@@ -80,11 +122,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['a
                         <label for="freeShipping" class="form-check-label">livraison gratuite 0 xaf</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="shippingOption" id="expressShipping" value="2000" checked>
+                        <input class="form-check-input" type="radio" name="shippingOption" id="expressShipping" value="2000">
                         <label for="expressShipping" class="form-check-label">livraison rapide 2000 xaf</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="shippingOption" id="pickUp" value="2500" checked>
+                        <input class="form-check-input" type="radio" name="shippingOption" id="pickUp" value="2500">
                         <label for="pickUp" class="form-check-label">Retrait 2500 xaf</label>
                     </div>
 

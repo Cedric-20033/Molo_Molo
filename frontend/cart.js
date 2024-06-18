@@ -1,11 +1,8 @@
-let panier = [
-    {id:1 , nombre: 2},
-    {id:2 , nombre: 2},
-    {id:3 , nombre: 1}
-];
+let panier = [];
 
 $(document).ready(function(){
-    chargerArticlesPanier();
+    chargerPanierDepuisServeur();
+    //chargerArticlesPanier();
 
     $('input[name="shippingOption"]').change(function(){
         calculerTotal();
@@ -18,6 +15,13 @@ $(document).ready(function(){
     });
 });
 
+function chargerPanierDepuisServeur(){
+    $.post('cart.php', {action: 'getCart'}, function(response){
+        panier = JSON.parse(response);
+        chargerArticlesPanier()
+    });
+}
+
 function chargerArticlesPanier(){
     $('#cart-items').empty();
     let sousTotal = 0;
@@ -25,6 +29,8 @@ function chargerArticlesPanier(){
     //utiliser promise.all pour garantir que les articles sont affichés dans l'ordre
     let promises = panier.map(item => {
         return new Promise((resolve, reject) => {
+            document.getElementById('spinner-border').classList.add('d-block'); //ajouter la classe d-block pour afficher le chargement
+            document.getElementById('spinner-border').classList.remove('d-none'); //suprimer la class d-none pour afficher le chargement
             //on utilise une requête ajax pour envoyer la requette
             $.post('cart.php', {action: 'getProduct', id: item.id}, function(response){
                 let product = JSON.parse(response);
@@ -36,6 +42,11 @@ function chargerArticlesPanier(){
     });
 
     Promise.all(promises).then(results => {
+        document.getElementById('spinner-border').classList.add('d-none'); //ajouter la classe d-none pour enlever le chargement
+        document.getElementById('spinner-border').classList.remove('d-block'); //suprimer la class d-block pour enlever le chargement
+        if(results.length < 1){
+            alert ("aucun article ajouté dans le panier");
+        }
         results.forEach(({product, item, totalProduit}) => {
             $('#cart-items').append(`
                 <div class="row mb-3">
@@ -66,16 +77,33 @@ function chargerArticlesPanier(){
 }
 
 function retirerArticle(id){
-    panier = panier.filter(item => item.id !== id);
-    chargerArticlesPanier();
+    panier = panier.filter(item => item.id != id);
+
+    //retirer le produit dans le panier php
+    $.post('cart.php', {action: 'updateCart', panier: JSON.stringify(panier)}, function(response){
+        chargerArticlesPanier();
+    });
 }
 
 function mettreAjourQuantite(id, quantite){
+    alert("ok")
     let item = panier.find(item => item.id === id);
-    if(item){
+    if(item !== 0){
         item.nombre = parseInt(quantite);
     }
-    chargerArticlesPanier();
+
+   for(let i=0; i < panier.length; i++){
+        if(panier[i].id === item.id){
+            panier[i].nombre = item.nombre;
+            break;
+        }
+   }
+
+    //modifier le produit dans le panier
+    $.post('cart.php', {action: 'updateCart', panier: JSON.stringify(panier)}, function(response){
+        panier = JSON.parse(response);
+        chargerArticlesPanier();
+    });
 }
 
 function calculerTotal(){
@@ -83,4 +111,12 @@ function calculerTotal(){
     let livraison = parseFloat($('input[name="shippingOption"]:checked').val());
     let total = sousTotal + livraison;
     $('#total').text(`${total.toFixed(2)} xaf`);
+}
+
+function ajouterAuPanier(id, nombre){
+    $.post('cart.php', {action: 'addToCart', id: id, nombre: nombre}, function(response){
+        //la requête enregistre dans le tableau php le nouvel id et nombre puis renvoie le tableau dans response
+        panier = JSON.parse(response);
+        chargerArticlesPanier();
+    });
 }

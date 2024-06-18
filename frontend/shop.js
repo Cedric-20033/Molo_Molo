@@ -42,3 +42,12 @@ document.getElementById('overlay').addEventListener('click', function(event){
         document.getElementById('overlay-content').classList.remove('c-overlay-content');
     }
 })
+
+//ajout des produit au panier
+
+function ajouterAuPanier(id, nombre){
+    $.post('cart.php', {action: 'addToCart', id: id, nombre: nombre}, function(response){
+        //la requête enregistre dans le tableau php le nouvel id et nombre puis renvoie le tableau dans response
+        alert("produit ajouté au panier");
+    });
+}
