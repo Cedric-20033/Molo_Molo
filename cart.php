@@ -132,7 +132,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
                     <p class="mt-3">sous-total: <span id="subtotal">0 xaf</span></p>
                     <h5>Total: <span id="total">0 xaf</span></h5>
-                    <button class="btn btn-dark btn-block" id="checkout">passer a la caisse</button>
+                    <a href="cart2.php"><button class="btn btn-dark btn-block" id="checkout">passer a la caisse</button></a>
 
                 </div>
             </div>

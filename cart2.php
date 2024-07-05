@@ -1,10 +1,11 @@
 <?php  
 include("./backend/fonction.php");
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'getproduct' && isset($_POST['id'])){
-    $product = select_product($_POST['id']);
-    echo json_encode($product);
-    exit;
+if (empty($_SESSION['panier'])) {
+    echo "Votre panier est vide.";
+    exit();
 }
+$panier = $_SESSION['panier'];
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -17,8 +18,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['a
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="./frontend/cart.css">
+    <link rel="stylesheet" href="./frontend/cart2.css">
     <title>Molo Molo</title>
+    <script>
+        const panier = <?php echo json_encode($_SESSION['panier']); ?>;
+        console.log(panier)
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
@@ -62,20 +67,121 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['a
                 </li>
             </ul>
         </div>
-    </nav>
+    </nav><br><br><br>
 
-    <script>
-        alert(window.ok);
-    </script>
+    <div class="container">
+    <h1 class="text-center">Check Out</h1>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card form-section">
+                <div class="card-body">
+                    <h4>Informations de contact</h4>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="firstName">Prénom</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="Prénom">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="lastName">Nom</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Nom">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Numéro de téléphone</label>
+                        <input type="text" class="form-control" id="phoneNumber" placeholder="Numéro de téléphone">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Adresse email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Votre email">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card form-section">
+                <div class="card-body">
+                    <h4>Adresse de livraison</h4>
+                    <div class="form-group">
+                        <label for="streetAddress">Adresse</label>
+                        <input type="text" class="form-control" id="streetAddress" placeholder="Adresse">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="country">Pays</label>
+                            <select id="country" class="form-control">
+                                <option selected>Cameroun</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="city">Ville</label>
+                            <input type="text" class="form-control" id="city" placeholder="Ville">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="state">Région</label>
+                            <input type="text" class="form-control" id="state" placeholder="Région">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="zipCode">Code postal</label>
+                            <input type="text" class="form-control" id="zipCode" placeholder="Code postal">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card form-section">
+                <div class="card-body">
+                    <h4>Méthode de paiement</h4>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" checked>
+                            <label class="form-check-label" for="creditCard">
+                                Payer par carte de crédit
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="paypal">
+                            <label class="form-check-label" for="paypal">
+                                Paypal
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardNumber">Numéro de carte</label>
+                        <input type="text" class="form-control" id="cardNumber" placeholder="1234 1234 1234 1234">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="expirationDate">Date d'expiration</label>
+                            <input type="text" class="form-control" id="expirationDate" placeholder="MM/AA">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="cvcCode">CVC</label>
+                            <input type="text" class="form-control" id="cvcCode" placeholder="CVC">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Résumé de la commande</h4>
+                    <div id="orderSummary">
+                        <!-- Les produits du panier seront chargés ici -->
+                    </div>
+                    <h5 class="mt-3">Total : <span id="orderTotal">$0.00</span></h5>
+                    <button class="btn btn-dark btn-checkout mt-3" onclick="validerCommande()">Passer la commande</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+   
 
     <?php 
-        /*if(isset($_GET['sign']) && $_GET['sign']=='up'){
-            include("frontend/inscription.php");
-        }else{
-            include("./frontend/connexion.php");
-        }*/
-
-        
         include("./frontend/footer.php")
     ?>
 

@@ -1,8 +1,3 @@
-<?php 
-    include("./backend/fonction.php");
-    include("./backend/class.php");
-    $new_product = produit_poo();
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -55,8 +50,8 @@
                 <li class="navbar-item ml-3">
                     <a href="#" class="nav-link"><li class="fas fa-search" style="cursor: pointer"></li></a>
                 </li>
-                <li class="navbar-item ml-3">
-                    <a href="cart.php" class="nav-link"><li class="fas fa-shopping-cart" style="cursor: pointer"></a>
+                <li class="navbar-item ml-3 d-flex">
+                    <a href="cart.php" class="nav-link mr-1"><li class="fas fa-shopping-cart" style="cursor: pointer"></a>5
                 </li>
                 <li class="navbar-item ml-3">
                     <a href="#" class="nav-link"><li class="fas fa-user" style="cursor: pointer"></a>
@@ -99,8 +94,8 @@
                                 <img src="./media/images/<?=$row['image']; ?>" alt="<?=$row['nom']; ?>" class="card-img-top img-fluid mb-3">
                                 <div class="card-body mt-0">
                                     <h5 class="card-title mt-0"><?=$row['nom']; ?> </h5>
-                                    <p class="card-text mt-0"><?=$row['prix']; ?> <del><?=$row['prix']*100/4; ?></del></p>
-                                    <a href="#" class="btn btn-dark mt-3" id="<?=$row['id']; ?>">ajouter au panier</a>
+                                    <p class="card-text mt-0 fw-bold"><?=number_format($row['prix'], 0, '.', ',').'FCFA'; ?> <del><?=number_format(floor($row['prix']*100/85), 0, '.', ',').'FCFA'; ?></del></p>
+                                    <button class="btn btn-dark mt-3" id="<?=$row['id']; ?>" onclick="ajouterAuPanier(<?=$row['id']; ?>, 1)">ajouter au panier</button>
                                 </div>
                             </div>
                         </div>
@@ -173,7 +168,7 @@
                                 <img src="./media/images/<?=$product['image'];?>" alt="produit 1" class="card-img-top img-luid mt-3">
                                 <div class="card-body text-center" style="max-width: 90%; min-width: 90%;">
                                     <h5 class="card-title"><?=$product['nom']; ?></h5>
-                                    <p class="card-text"><?=$product['prix']; ?> xaf</p>
+                                    <p class="card-text"><?=number_format($product['prix'], 0, '.', ',').'FCFA' ; ?></p>
                                 </div>
                             </div>
                         </div>
@@ -276,4 +271,17 @@
 
     
 </body>
+
+<script>
+    //ajout des produit au panier
+
+    function ajouterAuPanier(id, nombre){
+        let nbre = parseInt(nombre);
+        let i = parseInt(id);
+        $.post('cart.php', {action: 'addToCart', id: i, nombre: nbre}, function(response){
+            //la requête enregistre dans le tableau php le nouvel id et nombre puis renvoie le tableau dans response
+            alert("produit ajouté au panier");
+        });
+    }
+</script>
 </html>

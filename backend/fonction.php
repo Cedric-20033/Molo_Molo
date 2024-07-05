@@ -79,12 +79,31 @@ function produit_poo(){
 //fonction pour selectionner un seul produit
 
 function select_product($id){
-    $produits = [
+    /*$produits = [
         1=>["id" => 1, "nom" => "moto1", "image" => "moto.png", "categorie" => "automobile", "prix" => 1000000],
         2=>["id" => 2, "nom" => "moto2", "image" => "moto.png", "categorie" => "automobile", "prix" => 1000000],
         3=>["id" => 1, "nom" => "moto3", "image" => "moto.png", "categorie" => "automobile", "prix" => 1000000]
     ];
 
-    return isset($produits[$id]) ? $produits[$id] : null;
-}
+    return isset($produits[$id]) ? $produits[$id] : null;*/
+
+     // Connexion à la base de données
+     $conn = new mysqli("localhost", "root", "", "molo_molo");
+
+     if ($conn->connect_error) {
+         die("Connexion échouée : " . $conn->connect_error);
+     }
+ 
+     $sql = "SELECT * FROM produits WHERE id = ?";
+     $stmt = $conn->prepare($sql);
+     $stmt->bind_param("i", $id);
+     $stmt->execute();
+     $result = $stmt->get_result();
+ 
+     if ($result->num_rows > 0) {
+         return $result->fetch_assoc();
+     } else {
+         return null;
+     }
+ }
 ?>

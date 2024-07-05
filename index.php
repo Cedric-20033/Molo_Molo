@@ -1,3 +1,8 @@
+<?php 
+    include("./backend/fonction.php");
+    include("./backend/class.php");
+    $new_product = produit_poo();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
