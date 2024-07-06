@@ -57,7 +57,7 @@ $panier = $_SESSION['panier'];
                     <a href="#" class="nav-link"><li class="fas fa-shopping-cart" style="cursor: pointer"></a>
                 </li>
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link" ><li class="fas fa-user" style="cursor: pointer; color: white"></a>
+                    <a href="profiles.php" class="nav-link"><li class="fas fa-user" style="cursor: pointer"></a>
                 </li>
                 <li class="navbar-item ml-3">
                     <a href="#" class="nav-link" ><li class="fas fa-sign-in-alt" style="cursor: pointer; color: white"></a>
@@ -70,7 +70,20 @@ $panier = $_SESSION['panier'];
     </nav><br><br><br>
 
     <div class="container">
-    <h1 class="text-center">Check Out</h1>
+    <h1 class="text-center">Détails de la commande</h1>
+
+    <!--div class="container">
+        <ul class="progressbar">
+            <li class="active">Shopping cart</li>
+            <li>Checkout details</li>
+            <li>Order complete</li>
+        </ul>
+    </div><br><br><br-->
+
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 66%;" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100">détails de la commande</div>
+        </div><br>
+
     <div class="row">
         <div class="col-md-8">
             <div class="card form-section">

@@ -48,7 +48,7 @@
                     <a href="cart.php" class="nav-link"><li class="fas fa-shopping-cart" style="cursor: pointer; color: white;"></a>
                 </li>
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link"><li class="fas fa-user" style="cursor: pointer; color: white;"></a>
+                    <a href="profiles.php" class="nav-link"><li class="fas fa-user" style="cursor: pointer"></a>
                 </li>
                 <li class="navbar-item ml-3">
                     <a href="#" class="nav-link"><li class="fas fa-sign-in-alt" style="cursor: pointer; color: white;"></a>

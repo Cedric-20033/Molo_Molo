@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Molo Molo</title>
+    <link rel="stylesheet" href="./frontend/proiles.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
@@ -26,10 +27,10 @@
                     <a href="./shop.php" class="nav-link">Boutique</a>
                 </li>
                 <li class="navbar-item">
-                    <a href="" class="nav-link active">Epargne</a>
+                    <a href="./epargne.php" class="nav-link">Epargne</a>
                 </li>
                 <li class="navbar-item">
-                    <a href="./contact.php" class="nav-link">Nous contater</a>
+                    <a href="" class="nav-link">Nous contater</a>
                 </li>
             </ul>
         </div>
@@ -53,24 +54,92 @@
                 </li>
             </ul>
         </div>
-    </nav>
+    </nav><br><br>
 
-    <?php 
-        /*if(isset($_GET['sign']) && $_GET['sign']=='up'){
-            include("frontend/inscription.php");
-        }else{
-            include("./frontend/connexion.php");
-        }*/
+    <div class="container">
+    <div class="menu-item">
+        <a href="#" data-toggle="modal" data-target="#modal" data-url="profil2.php">
+            <span>Mon profil</span>
+            <i class="fas fa-user"></i>
+        </a>
+    </div>
+    <div class="menu-item">
+        <a href="#" data-toggle="modal" data-target="#modal" data-url="objectif.php">
+            <span>Mes Objectifs</span>
+            <i class="fas fa-tags"></i>
+        </a>
+    </div>
+    <div class="menu-item">
+        <a href="#" data-toggle="modal" data-target="#modal" data-url="historique_retrait.php">
+            <span>Historiques des retraits</span>
+            <i class="fas fa-store"></i>
+        </a>
+    </div>
+    <div class="menu-item">
+        <a href="#" data-toggle="modal" data-target="#modal" data-url="vendeur.php">
+            <span>Suggérer un vendeur</span>
+            <i class="fas fa-store-alt"></i>
+        </a>
+    </div>
+    <div class="menu-item">
+        <a href="#" data-toggle="modal" data-target="#modal" data-url="modifier_profil.php">
+            <span>Modifier mon profil</span>
+            <i class="fas fa-edit"></i>
+        </a>
+    </div>
+    <div class="menu-item">
+        <a href="#" data-toggle="modal" data-target="#modal" data-url="politique.php">
+            <span>Politique de confidentialité</span>
+            <i class="fas fa-shield-alt"></i>
+        </a>
+    </div>
+    <div class="menu-item text-danger">
+        <a href="#">
+            <span>Se déconnecter</span>
+            <i class="fas fa-sign-out-alt"></i>
+        </a>
+    </div>
+</div>
 
-        
-        include("./frontend/footer.php")
-    ?>
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Détail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Contenu chargé dynamiquement -->
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="frontend/acceuil_j.js"></script>
+
+<script>
+    $('#modal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var url = button.data('url');
+        var modal = $(this);
+        $.ajax({
+            url: url,
+            success: function(data) {
+                modal.find('.modal-body').html(data);
+            }
+        });
+    });
+
+</script>
+
+<script src="frontend/profiles.js"></script>
     
 </body>
 </html>

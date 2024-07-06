@@ -64,7 +64,7 @@ $id_commande = $_GET['id_commande'];
                     <a href="#" class="nav-link"><li class="fas fa-shopping-cart" style="cursor: pointer"></a>
                 </li>
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link" ><li class="fas fa-user" style="cursor: pointer; color: white"></a>
+                    <a href="profiles.php" class="nav-link"><li class="fas fa-user" style="cursor: pointer"></a>
                 </li>
                 <li class="navbar-item ml-3">
                     <a href="#" class="nav-link" ><li class="fas fa-sign-in-alt" style="cursor: pointer; color: white"></a>
@@ -77,16 +77,13 @@ $id_commande = $_GET['id_commande'];
     </nav><br><br>
 
     <div class="container text-center">
-        <h1 class="animate_animated animate_fadeInDown">Commande Complète!</h1>
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <ul class="list-inline">
-                    <li class="list-inline-item">Panier</li>
-                    <li class="list-inline-item">Détails de la commande</li>
-                    <li class="list-inline-item active">Commande complète</li>
-                </ul>
-            </div>
-        </div>
+        <h1 class="animate_animated animate_fadeInDown">Réussi !</h1>
+
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">commande complète</div>
+        </div><br>
+
+       
         <h2 class="animate_animated animate_fadeInUp">Merci! 🎉</h2>
         <p>Votre commande a été reçue</p>
         <div id="orderDetails" class="my-4 animate_animated animate_fadeIn"></div>

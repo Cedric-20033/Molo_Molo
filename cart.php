@@ -56,6 +56,55 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="./frontend/cart.css">
+    <style>
+        /* CSS progessbar*/
+.progressbar {
+    counter-reset: step;
+  }
+  .progressbar li {
+    list-style-type: none;
+    width: 33%;
+    float: left;
+    font-size: small;
+    position: relative;
+    text-align: center;
+  }
+  .progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    background-color: #7d7d7d; /* Couleur de l'étape active */
+    color: white; /* Couleur du texte */
+    display: block;
+    text-align: center;
+    margin: auto;
+    position: relative;
+    z-index: 1000;
+  }
+  .progressbar li.active:before {
+    background-color: #4b4b4b; /* Couleur de l'étape inactive */
+  }
+  .progressbar li.active + li:before {
+    background-color: #cccccc; /* Couleur de l'étape suivante après l'étape active si nécessaire */
+  }
+  .progressbar li::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #cccccc; /* Couleur de la ligne */
+    top: 15px;
+    left: -50%;
+    z-index: -1;
+  }
+  
+  .progressbar li:first-child::after {
+    content: none;
+  }
+    </style>
     <title>Molo Molo</title>
 </head>
 <body>
@@ -90,7 +139,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                     <a href="#" class="nav-link"><li class="fas fa-shopping-cart" style="cursor: pointer"></a>
                 </li>
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link" ><li class="fas fa-user" style="cursor: pointer; color: white"></a>
+                    <a href="profiles.php" class="nav-link"><li class="fas fa-user" style="cursor: pointer"></a>
                 </li>
                 <li class="navbar-item ml-3">
                     <a href="#" class="nav-link" ><li class="fas fa-sign-in-alt" style="cursor: pointer; color: white"></a>
@@ -104,6 +153,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     <div class="container mt-5 pt-5">
         <h1>panier</h1>
+
+        <!--div class="container">
+            <ul class="progressbar">
+                <li class="active">Shopping cart</li>
+                <li>Checkout details</li>
+                <li>Order complete</li>
+            </ul>
+        </div><br><br><br-->
+
+
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">votre panier</div>
+        </div><br>
 
         <div class="row">
             <div class="col-md-8">
