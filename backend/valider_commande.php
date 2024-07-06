@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->close();
         $conn->close();
 
-        echo json_encode(['success' => true]);
+        echo json_encode(['success' => true, 'id_commande' => $commande_id]);
     } else {
         echo json_encode(['success' => false]);
     }

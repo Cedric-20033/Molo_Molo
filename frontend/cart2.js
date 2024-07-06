@@ -75,7 +75,7 @@ function validerCommande() {
             r = JSON.parse(response); //convertir la chaine de carractère reçus en format en json en objet js
             if (r.success) {
                 alert("commande validé");
-                window.location.href = "confirmation.php";
+                window.location.href = `cart3.php?id_commande=${r.id_commande}`;
             } else {
                 alert("Erreur lors de la validation de la commande. Veuillez réessayer.");
             }
