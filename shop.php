@@ -129,6 +129,26 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="monModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Configurez votre payement par tranche</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="contenuModal">
+                    <!-- Contenu du modal -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <?php 
         include("./frontend/footer.php");
     ?>
@@ -151,7 +171,8 @@ $(document).ready(function() {
                     <div class="card h-100 animate__animated animate__zoomIn">
                         <img src="./media/images/${product.image}" class="card-img-top img-fluid mb-3" alt="${product.nom}">
                         <div class="container">
-                            <button class="btn btn-dark add-to-cart" onclick="ajouterAuPanier(${product.id}, 1)" data-id="${product.id} " style="width: 100%">ajouter au panier</button>
+                            <button class="btn btn-dark add-to-cart" onclick="ajouterAuPanier(${product.id}, 1)" data-id="${product.id} " style="width: 100%">ajouter au panier</button><br><br>
+                            <button class="btn btn btn-outline-secondary add-to-cart" onclick="tranche(${product.id})" style="width: 100%">payer par tranche</button>
                         </div>
                         <div class="card-body">
                             <div class="ratings">
@@ -244,6 +265,8 @@ $(document).ready(function() {
 
     updateProducts();
 })
+
+
 </script>
 <script src="./frontend/shop.js"></script>
     
