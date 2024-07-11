@@ -3,7 +3,7 @@ body{
     background: #f8f9fa;
 }
 .bg-image{
-    background-image: url('../media/images/fauteuil.jpg');
+    background-image: url('../media/images/voiture2.png');
     background-size: cover;
     background-position: center;
 }
