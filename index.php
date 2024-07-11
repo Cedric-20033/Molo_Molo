@@ -20,14 +20,16 @@
 </head>
 <body>
     <?php 
-        /*if(isset($_GET['sign']) && $_GET['sign']=='up'){
+        if(isset($_GET['sign']) && $_GET['sign']=='up'){
             include("frontend/inscription.php");
-        }else{
+        }else if(isset($_GET['sign'])){
             include("./frontend/connexion.php");
-        }*/
+        }else{
+            include("./frontend/acceuil2.php");
+            include("./frontend/footer.php");
+        }
 
-        include("./frontend/acceuil2.php");
-        include("./frontend/footer.php")
+        
     ?>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

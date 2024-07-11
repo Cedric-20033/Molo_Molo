@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 class Utilisateur {
     private $id;
@@ -10,7 +11,7 @@ class Utilisateur {
     public function __construct($id) {
         $this->id = $id;
         // Simuler la récupération des données de l'utilisateur à partir d'une base de données
-         // Connexion à la base de données
+        // Connexion à la base de données
         $con=mysqli_connect("localhost","root","","molo_molo");
 
         $sql = "SELECT *  FROM utilisateur";
@@ -39,7 +40,7 @@ class Utilisateur {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_POST['id'];
+    $id = $_SESSION['id_user'];
     $utilisateur = new Utilisateur($id);
     echo json_encode($utilisateur->getUserInfo());
 }

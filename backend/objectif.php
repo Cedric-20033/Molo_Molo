@@ -9,7 +9,7 @@ function produit($id) {
         die("Connexion échouée : " . $conn->connect_error);
     }
 
-    $sql = "SELECT * FROM produits WHERE id = ?";
+    $sql = "SELECT * FROM objectif WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();

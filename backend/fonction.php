@@ -14,9 +14,26 @@ function connexion(){
     }
 }
 
+//produit
 function produit(){
     $con = connexion();
     $req="SELECT * FROM produits";
+    $res=mysqli_query($con, $req);
+    $products = array();
+    if($res == true){
+        while($row = mysqli_fetch_assoc($res)){
+            $products[] = $row;
+        }
+    }
+
+    mysqli_close($con);
+    return $products;
+}
+
+//objectif
+function objectif(){
+    $con = connexion();
+    $req="SELECT * FROM objectif";
     $res=mysqli_query($con, $req);
     $products = array();
     if($res == true){

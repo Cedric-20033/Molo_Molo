@@ -1,5 +1,11 @@
+<?php
+include("./backend/fonction.php");
+if(!isset($_SESSION['id_user']) || $_SESSION['id_user']==''){
+    header("location: ./index.php?sign='in'");
+}
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,19 +44,19 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link"><li class="fas fa-search" style="cursor: pointer"></li></a>
+                    <a href="#" class="nav-link"><li class="fas fa-search" style="cursor: pointer; color: white"></li></a>
                 </li>
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link"><li class="fas fa-shopping-cart" style="cursor: pointer"></a>
+                    <a href="#" class="nav-link"><li class="fas fa-shopping-cart" style="cursor: pointer; color: white"></a>
                 </li>
                 <li class="navbar-item ml-3">
-                    <a href="profiles.php" class="nav-link"><li class="fas fa-user" style="cursor: pointer"></a>
+                    <a href="profiles.php" class="nav-link"><li class="fas fa-user" style="cursor: pointer; color: white"></a>
                 </li>
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link"><li class="fas fa-sign-in-alt" style="cursor: pointer"></a>
+                    <a href="#" class="nav-link"><li class="fas fa-sign-in-alt" style="cursor: pointer; color: white"></a>
                 </li>
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link"><li class="fas fa-sign-out-alt" style="cursor: pointer"></a>
+                    <a href="./frontend/user_session.php" class="nav-link"><li class="fas fa-sign-out-alt" style="cursor: pointer; color: white"></a>
                 </li>
             </ul>
         </div>
@@ -94,7 +100,7 @@
         </a>
     </div>
     <div class="menu-item text-danger">
-        <a href="#">
+        <a href="./frontend/user_session.php">
             <span>Se déconnecter</span>
             <i class="fas fa-sign-out-alt"></i>
         </a>

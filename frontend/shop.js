@@ -63,7 +63,7 @@ let cni;
 let ville;
 let quartier;
 let profession;
-const id_user = 1;
+let prix_tranche;
 
 function tranche(id){
     // Récupérer l'élément du contenu du modal
@@ -195,6 +195,7 @@ function tranche2(id){
         const frequency = parseInt(document.getElementById('frequency').value);
 
         const amount = (prix / months) / frequency; //obtenir le montant par tranche
+        prix_tranche = parseFloat(amount);
         document.getElementById('amount').textContent = `${amount.toFixed(2)} XAF`;
     });
 
@@ -244,6 +245,7 @@ function tranche2(id){
 
         $(document).ready(function() {
             // Effectuer une requête Ajax pour obtenir les informations de l'utilisateur
+            let id_user = 1;
             $.ajax({
                 url: './backend/utilisateur.php',
                 type: 'POST',
@@ -316,25 +318,66 @@ function tranche2(id){
                     })
 
                     $('#submitBtn3').click(function() {
-                        alert('paiement par tranche enclenché');
+                        
+                    
+                    //insérer les informations dans la bd
+                    $.ajax({
+                        url: './backend/insert_epargne.php',
+                        type: 'POST',
+                        data: { 
+                            prix: prix_tranche,
+                            mois: mois,
+                            frequence: frequence,
+                            sms: sms,
+                            cni: cni,
+                            ville: ville,
+                            quartier: quartier,
+                            profession: profession,
+                            id_produit: id, //c'est l'id passé en paramettre dans la fonction
+                            type: 'produit'
+                        },
+                        dataType: 'json',
+                        success: function(response) {
+                            console.log(response);
+                            if (response.success) {
+                                /*$('#cni').val(response.cni || ''); //afficher la cni recuperé ou le vide s'il y'a erreur
+                                $('#ville').val(response.ville || '');
+                                $('#quartier').val(response.quartier || '');
+                                $('#profession').val(response.profession || '');*/
+                                console.log(response.success);
 
-                        //effacer le contenu
-                    contenuModal.empty();
+                                alert('paiement par tranche enclenché');
 
-                    contenuModal.append(`
-                    <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
-                    </div><br>
+                                //effacer le contenu
+                                contenuModal.empty();
 
-                    <h3>vous pouvez consulter les paramètres de votre profil pour évoluer avec le paiement</3><br>
-                    <button type="button" class="btn btn-outline-secondary" id="commencer">commencer le paiement</button>
-                    `)
+                                contenuModal.append(`
+                                    <div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+                                    </div><br>
+
+                                    <h3>vous pouvez consulter les paramètres de votre profil pour évoluer avec le paiement</3><br>
+                                    <button type="button" class="btn btn-outline-secondary" id="commencer">commencer le paiement</button>
+                                `)
+
+                                //rediriger si on clique vers la page de profil
+                                $('#commencer').click(function() {
+                                    window.location.href = `profiles.php`;
+                                })
+
+                            }else{
+                                console.log(response.erreur);
+                            }
+                        },
+                        error: function(response) {
+                            console.log(response);
+                            alert('Erreur lors de l\'enregistrement des informations');
+                        }
                     });
 
-                    //rediriger si on clique vers la page de profil
-                    $('#commencer').click(function() {
-                        window.location.href = `profiles.php`;
-                    })
+
+                    
+            });
                     
                 }
                 

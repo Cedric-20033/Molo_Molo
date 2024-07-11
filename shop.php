@@ -1,5 +1,8 @@
 <?php 
-    include("./backend/fonction.php");
+include("./backend/fonction.php");
+if(!isset($_SESSION['id_user']) || $_SESSION['id_user'] == ''){
+    header("location: ./index.php?sign='in'");
+}
     $product = produit();
 ?>
 <!DOCTYPE html>
@@ -54,7 +57,7 @@
                     <a href="#" class="nav-link"><li class="fas fa-sign-in-alt" style="cursor: pointer; color: white;"></a>
                 </li>
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link"><li class="fas fa-sign-out-alt" style="cursor: pointer; color: white;"></a>
+                    <a href="./frontend/user_session.php" class="nav-link"><li class="fas fa-sign-out-alt" style="cursor: pointer; color: white;"></a>
                 </li>
             </ul>
         </div>
@@ -122,6 +125,9 @@
                     <!-- les produits seront inséré ici via js -->
 
                 </div>
+                <div class="spinner-border d-block" id="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
                 <div class="text-center mt-4 mb-4">
                     <button id="show-more" class="btn btn-dark">suivant</button>
                 </div>
@@ -140,7 +146,7 @@
                     </button>
                 </div>
                 <div class="modal-body" id="contenuModal">
-                    <!-- Contenu du modal -->
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -162,29 +168,46 @@ $(document).ready(function() {
     var products = <?php echo json_encode($product); ?>;
     var currentPage = 1;
     var productsPerPage = 9;
+    
+    const id_user = <?php echo json_encode($_SESSION['id_user']); ?>;
+    console.log(id_user);
 
     function renderProducts(products) {
         $('#product-grid').empty();
+
+        //le spinner de chargement
+        document.getElementById('spinner-border').classList.remove('d-none');
+        document.getElementById('spinner-border').classList.remove('d-block');
+        document.getElementById('spinner-border').classList.add('d-block');
+
         products.forEach(product => {
-            var productHTML = `
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                    <div class="card h-100 animate__animated animate__zoomIn">
-                        <img src="./media/images/${product.image}" class="card-img-top img-fluid mb-3" alt="${product.nom}">
-                        <div class="container">
-                            <button class="btn btn-dark add-to-cart" onclick="ajouterAuPanier(${product.id}, 1)" data-id="${product.id} " style="width: 100%">ajouter au panier</button><br><br>
-                            <button class="btn btn btn-outline-secondary add-to-cart" onclick="tranche(${product.id})" style="width: 100%">payer par tranche</button>
-                        </div>
-                        <div class="card-body">
-                            <div class="ratings">
-                                ${renderStars(product.note)}
+            new Promise ((resolve, reject) => {
+                var productHTML = `
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                        <div class="card h-100 animate__animated animate__zoomIn">
+                            <img src="./media/images/${product.image}" class="card-img-top img-fluid mb-3" alt="${product.nom}">
+                            <div class="container">
+                                <button class="btn btn-dark add-to-cart" onclick="ajouterAuPanier(${product.id}, 1)" data-id="${product.id} " style="width: 100%">ajouter au panier</button><br><br>
+                                <button class="btn btn btn-outline-secondary add-to-cart" onclick="tranche(${product.id})" style="width: 100%">payer par tranche</button>
                             </div>
-                            <h5 class="card-title">${product.nom}</h5>
-                            <p class="card-text">${product.prix} xaf</p>
+                            <div class="card-body">
+                                <div class="ratings">
+                                    ${renderStars(product.note)}
+                                </div>
+                                <h5 class="card-title">${product.nom}</h5>
+                                <p class="card-text">${product.prix} xaf</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
-            $('#product-grid').append(productHTML);
+                `;
+                $('#product-grid').append(productHTML);
+
+                resolve();
+            }).then(() => {
+                document.getElementById('spinner-border').classList.remove('d-block');
+                document.getElementById('spinner-border').classList.add('d-none');
+            })
+            
         });
     }
 

@@ -1,3 +1,8 @@
+<?php
+if(isset($_SESSION['id_user']) && $_SESSION['id_user'] != ''){
+    header("location: ./");
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -17,22 +22,28 @@
                         <div class="row">
                             <div class="col-lg-10 col-xl-7 mx-auto">
                                 <h3 class="display-4">INSCRIPTION</h3>
-                                <p class="text-muted mb-4">vous avez déjà un compte? <a href="./">Sign in</a></p>
+                                <p class="text-muted mb-4">vous avez déjà un compte? <a href="./index.php?sign=in">Sign in</a></p>
                                 <form action="" method="post" class="form-signup">
                                     <div class="form-group mb-3">
-                                        <input type="text" name="" id="" placeholder="votre nom" class="form-control rounded-pill border-0 shadow-sm px-4">
+                                        <input type="text" name="nom" id="nom" placeholder="votre nom" class="form-control rounded-pill border-0 shadow-sm px-4">
                                     </div>
                                     <div class="form-group mb-3">
-                                        <input type="text" name="" id="" placeholder="username" class="form-control rounded-pill border-0 shadow-sm px-4">
+                                        <input type="text" name="prenom" id="prenom" placeholder="prénom" class="form-control rounded-pill border-0 shadow-sm px-4">
                                     </div>
                                     <div class="form-group mb-3">
-                                        <input type="email" name="" id="" placeholder="votre email" class="form-control rounded-pill border-0 shadow-sm px-4">
+                                        <input type="tel" name="numero" id="numero" placeholder="votre contact" class="form-control rounded-pill border-0 shadow-sm px-4">
                                     </div>
                                     <div class="form-group mb-3">
-                                        <input type="password" name="" id="" placeholder="mot de passe" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                                        <input type="email" name="email" id="email" placeholder="votre email" class="form-control rounded-pill border-0 shadow-sm px-4">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input type="password" name="passe1" id="passe1" placeholder="mot de passe" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input type="password" name="passe2" id="passe2" placeholder="confirmer mot de passe" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
                                     </div>
                                     <div class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" name="" id="customcheck1" class="custom-control-input">
+                                        <input type="checkbox" name="customcheck1" id="customcheck1" class="custom-control-input">
                                         <label for="customcheck1" class="custom-control-label">j'ai lu et accepte la  <a href="#">politique de confidentialité</a> et la <a href="#">politique d'utilisation</a></label>
                                     </div>
                                     <input type="reset" value="effacer" class="btn btn-secondary btn-block text-uppercase mb-2 rounded-pill shadow-sm">

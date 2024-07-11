@@ -1,6 +1,9 @@
 <?php 
-    include("./backend/fonction.php");
-    $product = produit();
+include("./backend/fonction.php");
+if(!isset($_SESSION['id_user']) || $_SESSION['id_user'] == ''){
+    header("location: ./index.php?sign='in'");
+}
+    $product = objectif();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -13,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="./frontend/epargne.css">
+    <link rel="stylesheet" href="./frontend/shop.css">
     <title>Molo Molo</title>
 </head>
 <body>
@@ -28,43 +31,43 @@
                     <a href="./" class="nav-link">Accueil</a>
                 </li>
                 <li class="navbar-item">
-                    <a href="./shop.php" class="nav-link">Boutique</a>
+                    <a href="./shop.php" class="nav-link ">Boutique</a>
                 </li>
                 <li class="navbar-item">
-                    <a href="" class="nav-link active">Epargne</a>
+                    <a href="./epargne.php" class="nav-link active">Epargne</a>
                 </li>
                 <li class="navbar-item">
                     <a href="./contact.php" class="nav-link">Nous contater</a>
                 </li>
             </ul>
         </div>
-
+    
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link"><li class="fas fa-search" style="cursor: pointer"></li></a>
+                    <a href="#" class="nav-link"><li class="fas fa-search" style="cursor: pointer; color: white;"></li></a>
                 </li>
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link"><li class="fas fa-shopping-cart" style="cursor: pointer"></a>
+                    <a href="cart.php" class="nav-link"><li class="fas fa-shopping-cart" style="cursor: pointer; color: white;"></a>
                 </li>
                 <li class="navbar-item ml-3">
                     <a href="profiles.php" class="nav-link"><li class="fas fa-user" style="cursor: pointer"></a>
                 </li>
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link"><li class="fas fa-sign-in-alt" style="cursor: pointer"></a>
+                    <a href="#" class="nav-link"><li class="fas fa-sign-in-alt" style="cursor: pointer; color: white;"></a>
                 </li>
                 <li class="navbar-item ml-3">
-                    <a href="#" class="nav-link"><li class="fas fa-sign-out-alt" style="cursor: pointer"></a>
+                    <a href="./frontend/user_session.php" class="nav-link"><li class="fas fa-sign-out-alt" style="cursor: pointer; color: white;"></a>
                 </li>
             </ul>
         </div>
-    </nav><br><br><br>
+    </nav><br><br><br></b>
 
     <!-- banniere -->
     <header class="shop-header text-center py-5">
         <div class="container">
-            <h1>Epargne</h1>
-            <p>organisez vos cérémonies sans stress.</p>
+            <h1>EPARGNE</h1>
+            <p>vos objectifs, vos épargnes.</p>
         </div>
     </header>
 
@@ -122,6 +125,9 @@
                     <!-- les produits seront inséré ici via js -->
 
                 </div>
+                <div class="spinner-border d-block" id="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
                 <div class="text-center mt-4 mb-4">
                     <button id="show-more" class="btn btn-dark">suivant</button>
                 </div>
@@ -129,16 +135,28 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="monModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Configurez vos objectfis</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="contenuModal">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <?php 
-        /*if(isset($_GET['sign']) && $_GET['sign']=='up'){
-            include("frontend/inscription.php");
-        }else{
-            include("./frontend/connexion.php");
-        }*/
-
-        
-        include("./frontend/footer.php")
+        include("./frontend/footer.php");
     ?>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -150,28 +168,43 @@ $(document).ready(function() {
     var products = <?php echo json_encode($product); ?>;
     var currentPage = 1;
     var productsPerPage = 9;
+    
+    const id_user = <?php echo json_encode($_SESSION['id_user']); ?>;
 
     function renderProducts(products) {
         $('#product-grid').empty();
+
+        //le spinner de chargement
+        document.getElementById('spinner-border').classList.remove('d-none');
+        document.getElementById('spinner-border').classList.remove('d-block');
+        document.getElementById('spinner-border').classList.add('d-block');
+
         products.forEach(product => {
-            var productHTML = `
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                    <div class="card h-100 animate__animated animate__zoomIn">
-                        <img src="./media/images/${product.image}" class="card-img-top img-fluid mb-3" alt="${product.nom}">
-                        <div class="container">
-                            <button class="btn btn-dark add-to-cart" onclick="ajouterAuPanier(${product.id}, 1)" data-id="${product.id} " style="width: 100%">ajouter au panier</button>
-                        </div>
-                        <div class="card-body">
-                            <div class="ratings">
-                                ${renderStars(product.note)}
+            new Promise ((resolve, reject) => {
+                var productHTML = `
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                        <div class="card h-100 animate__animated animate__zoomIn">
+                            <img src="./media/images/${product.image}" class="card-img-top img-fluid mb-3" alt="${product.nom}">
+                            <div class="container">
+                                <button class="btn btn btn-outline-secondary add-to-cart" onclick="tranche(${product.id})" style="width: 100%">payer par tranche</button>
                             </div>
-                            <h5 class="card-title">${product.nom}</h5>
-                            <p class="card-text">${product.prix} xaf</p>
+                            <div class="card-body">
+                                <div class="ratings">
+                                    ${renderStars(product.note)}
+                                </div>
+                                <h5 class="card-title">${product.nom}</h5>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
-            $('#product-grid').append(productHTML);
+                `;
+                $('#product-grid').append(productHTML);
+
+                resolve();
+            }).then(() => {
+                document.getElementById('spinner-border').classList.remove('d-block');
+                document.getElementById('spinner-border').classList.add('d-none');
+            })
+            
         });
     }
 
@@ -252,6 +285,8 @@ $(document).ready(function() {
 
     updateProducts();
 })
+
+
 </script>
 <script src="./frontend/epargne.js"></script>
     
